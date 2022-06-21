@@ -56,6 +56,7 @@ Plug 'sainnhe/gruvbox-material' " gruvbox with treesitter support
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' } 
 Plug 'github/copilot.vim' " Copilot integration
 Plug 'https://gitlab.com/__tpb/monokai-pro.nvim' " good theme
+Plug 'vlime/vlime', {'rtp': 'vim/'} " Common lisp integration
 
 call plug#end()
 
