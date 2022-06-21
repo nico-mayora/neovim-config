@@ -17,8 +17,6 @@ augroup highlight_yank
   autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank()
 augroup END
 
-
-
 " [Plugins]
 call plug#begin()
 " vim-cmp & vsnip
@@ -30,7 +28,6 @@ Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'rafamadriz/friendly-snippets'
 
-Plug 'mhartington/formatter.nvim' " formatting
 Plug 'neovim/nvim-lspconfig' " lsp
 Plug 'nvim-lualine/lualine.nvim' " bottom bar
 Plug 'kyazdani42/nvim-web-devicons' " better icons
@@ -58,6 +55,8 @@ Plug 'github/copilot.vim' " Copilot integration
 Plug 'https://gitlab.com/__tpb/monokai-pro.nvim' " good theme
 Plug 'vlime/vlime', {'rtp': 'vim/'} " Common lisp integration
 
+Plug 'sbdchd/neoformat' " formatting
+
 call plug#end()
 
 " [snippets]
@@ -69,25 +68,9 @@ endif
 autocmd FileType ruby setlocal omnifunc=LanguageClient#complete
 lua << EOF
 require'lspconfig'.solargraph.setup{}
-
-local util = require "formatter.util"
-
--- Provides the Format and FormatWrite commands
-require('formatter').setup {
-  -- All formatter configurations are opt-in
-  filetype = {
-    lua = {
-      -- ,or define your own:
-      function()
-        return {
-          exe = "rubocop",
-          stdin = true,
-        }
-      end
-    }
-  }
-}
 EOF
+
+let g:neoformat_enabled_ruby = ['rubocop']
 
 " [Vim-cmp]
 set completeopt=menu,menuone,noselect
@@ -198,6 +181,7 @@ nnoremap <leader>b :ls<CR>:b<Space>
 tnoremap <Esc> <C-\><C-n>
 noremap <space> :
 command Nt :NERDTree
+command Fmt :Neoformat
 nnoremap <C-P> :Telescope find_files<CR>
 nnoremap <leader>g :Telescope live_grep<CR>
 nnoremap <leader>d :bp<CR>
