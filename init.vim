@@ -17,6 +17,7 @@ augroup highlight_yank
   autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank()
 augroup END
 
+
 " [Plugins]
 call plug#begin()
 " vim-cmp & vsnip
@@ -53,7 +54,9 @@ Plug 'sainnhe/gruvbox-material' " gruvbox with treesitter support
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' } 
 Plug 'github/copilot.vim' " Copilot integration
 Plug 'https://gitlab.com/__tpb/monokai-pro.nvim' " good theme
+
 Plug 'vlime/vlime', {'rtp': 'vim/'} " Common lisp integration
+Plug 'bhurlow/vim-parinfer'
 
 Plug 'sbdchd/neoformat' " formatting
 
@@ -67,10 +70,16 @@ endif
 " [LSP & formatter]
 autocmd FileType ruby setlocal omnifunc=LanguageClient#complete
 lua << EOF
+vim.diagnostic.config({ virtual_text = false,}) -- Turn off inline diagnostics
+vim.cmd('autocmd CursorHold * lua vim.diagnostic.open_float(0, {scope="cursor"})')
+vim.o.updatetime = 200
+
 require'lspconfig'.solargraph.setup{}
+require'lspconfig'.hls.setup{}
 EOF
 
 let g:neoformat_enabled_ruby = ['rubocop']
+let g:neoformat_enabled_haskell = ['stylishhaskell']
 
 " [Vim-cmp]
 set completeopt=menu,menuone,noselect
