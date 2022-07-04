@@ -56,7 +56,8 @@ Plug 'https://gitlab.com/__tpb/monokai-pro.nvim' " good theme
 Plug 'vlime/vlime', {'rtp': 'vim/'} " Common lisp integration
 Plug 'bhurlow/vim-parinfer'
 
-Plug 'sbdchd/neoformat' " formatting
+Plug 'sbdchd/neoformat' " Formatting
+Plug 'startup-nvim/startup.nvim' " Fancy splash screen
 
 call plug#end()
 
@@ -69,6 +70,7 @@ require('lsp_cfg')
 require('buffline_cfg')
 require('treesitter')
 require('telescope_cfg')
+require('startup_cfg')
 EOF
 
 " [snippets]
