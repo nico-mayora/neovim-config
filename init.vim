@@ -28,7 +28,7 @@ Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'rafamadriz/friendly-snippets'
 
-Plug 'startup-nvim/startup.nvim' " Fancy splash screen
+Plug 'goolord/alpha-nvim' " fancy startup
 Plug 'neovim/nvim-lspconfig' " lsp
 Plug 'nvim-lualine/lualine.nvim' " bottom bar
 Plug 'kyazdani42/nvim-web-devicons' " better icons
@@ -152,6 +152,7 @@ nnoremap <leader>f :bn<CR>
 map <F5> :source Session.vim<CR>
 map <F9> :nohl<CR>
 map <F10> :wa<CR>
+nnoremap <leader>ss <cmd>lua require('telescope.builtin').treesitter()<cr>
 
 " Use ctrl-[hjkl] to select the active split!
 nmap <silent> <c-k> :wincmd k<CR>
