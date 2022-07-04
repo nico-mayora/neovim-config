@@ -28,6 +28,7 @@ Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'rafamadriz/friendly-snippets'
 
+Plug 'startup-nvim/startup.nvim' " Fancy splash screen
 Plug 'neovim/nvim-lspconfig' " lsp
 Plug 'nvim-lualine/lualine.nvim' " bottom bar
 Plug 'kyazdani42/nvim-web-devicons' " better icons
@@ -57,7 +58,6 @@ Plug 'vlime/vlime', {'rtp': 'vim/'} " Common lisp integration
 Plug 'bhurlow/vim-parinfer'
 
 Plug 'sbdchd/neoformat' " Formatting
-Plug 'startup-nvim/startup.nvim' " Fancy splash screen
 
 call plug#end()
 
