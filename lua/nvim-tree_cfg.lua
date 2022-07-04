@@ -1,4 +1,3 @@
-lua << EOF
 require("nvim-tree").setup { -- BEGIN_DEFAULT_OPTS
   auto_reload_on_write = true,
   create_in_closed_folder = false,
@@ -174,4 +173,3 @@ require("nvim-tree").setup { -- BEGIN_DEFAULT_OPTS
     },
   },
 } -- END_DEFAULT_OPTS
-EOF

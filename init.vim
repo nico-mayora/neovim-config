@@ -17,7 +17,6 @@ augroup highlight_yank
   autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank()
 augroup END
 
-
 " [Plugins]
 call plug#begin()
 " vim-cmp & vsnip
@@ -61,6 +60,17 @@ Plug 'sbdchd/neoformat' " formatting
 
 call plug#end()
 
+" [Load lua config files]
+lua << EOF
+require('nvim-tree_cfg')
+require('nvim-cmp')
+require('lualine_cfg')
+require('lsp_cfg')
+require('buffline_cfg')
+require('treesitter')
+require('telescope_cfg')
+EOF
+
 " [snippets]
 if (&ft=='rb')
     :let g:vsnip_filetypes.ruby = ['rails']
@@ -68,14 +78,6 @@ endif
 
 " [LSP & formatter]
 autocmd FileType ruby setlocal omnifunc=LanguageClient#complete
-lua << EOF
-vim.diagnostic.config({ virtual_text = false,}) -- Turn off inline diagnostics
-vim.cmd('autocmd CursorHold * lua vim.diagnostic.open_float(0, {scope="cursor"})')
-vim.o.updatetime = 200
-
-require'lspconfig'.solargraph.setup{}
-require'lspconfig'.hls.setup{}
-EOF
 
 hi DiagnosticError guifg=#88088F
 hi DiagnosticWarn guifg=DarkOrange
@@ -121,18 +123,6 @@ set undofile
 " Also github.com/rockerBOO/awesome-neovim#tree-sitter-supported-colorscheme
 " Good ones -> anderson, sonokai, gruvbox, palenight, monokai
 set termguicolors
-lua << EOF
-require("bufferline").setup{
-    options = {
-        diagnostics = "lsp",
-        buffer_close_icon = '', 
-    }
-}
-EOF
-
-" let g:gruvbox_material_palette = 'hard'
-" colorscheme gruvbox-material
-" let g:airline_theme = "gruvbox"
 
 let g:monokaipro_filter = 'machine'
 colorscheme monokaipro
@@ -141,59 +131,6 @@ colorscheme monokaipro
 set nofoldenable
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
-
-" [Treesitter]
-lua << EOF
-require'nvim-treesitter.configs'.setup {
-  ensure_installed = { "haskell", "ruby" },
-
-  sync_install = false,
-
-  highlight = {
-    enable = true,
-    additional_vim_regex_highlighting = false,
-  },
-}
-EOF
-
-" [Telescope]
-lua << EOF
-local action_state = require "telescope.actions.state"
-local actions = require "telescope.actions"
-local telescope = require "telescope"
-
-telescope.setup {
-  defaults = {
-    vimgrep_arguments = {
-      "rg",
-      -- "--color=never",
-      "--no-heading",
-      "--with-filename",
-      "--line-number",
-      "--column",
-      "--smart-case",
-      "--hidden",
-    },
-    color_devicons = true,
-    mappings = {
-      i = {
-        ["<C-j>"] = actions.move_selection_next,
-        ["<C-k>"] = actions.move_selection_previous,
-      },
-    },
-  },
-  extensions = {
-    fzf = {
-      fuzzy = true, -- false will only do exact matching
-      override_generic_sorter = true,
-      override_file_sorter = true,
-      case_mode = "smart_case", -- this is default
-    },
-  },
-}
-
-require("telescope").load_extension "fzf"
-EOF
 
 " [Custom mappings]
 let mapleader = ","
