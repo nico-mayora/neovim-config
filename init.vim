@@ -41,11 +41,10 @@ Plug 'ludovicchabant/vim-gutentags' "Tag generation and maintainance
 Plug 'https://github.com/vim-ruby/vim-ruby' "Ruby integration
 Plug 'https://github.com/tpope/vim-commentary' "For Commenting gcc
 Plug 'rafi/awesome-vim-colorschemes' "colour schemes
-Plug 'preservim/nerdtree' "fs explorer
+Plug 'kyazdani42/nvim-tree.lua' "fs explorer
 Plug 'https://github.com/tpope/vim-rails' "rails utilities
 Plug 'https://github.com/tpope/vim-endwise' "autoappend do, then, end, etc
 Plug 'easymotion/vim-easymotion' "better motion
-Plug 'https://github.com/ryanoasis/vim-devicons' "Developer Icons
 Plug 'nvim-lua/plenary.nvim' " Lua functions
 Plug 'nvim-telescope/telescope.nvim' " Fuzzy finder
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " Better syntax highlighting
@@ -78,8 +77,24 @@ require'lspconfig'.solargraph.setup{}
 require'lspconfig'.hls.setup{}
 EOF
 
+hi DiagnosticError guifg=#88088F
+hi DiagnosticWarn guifg=DarkOrange
+hi DiagnosticInfo guifg=Blue
+hi DiagnosticHint guifg=Green
+
+sign define DiagnosticSignError text= texthl=DiagnosticError linehl= numhl=
+sign define DiagnosticSignWarn  text= texthl=DiagnosticWarn  linehl= numhl=
+sign define DiagnosticSignInfo  text= texthl=DiagnosticInfo  linehl= numhl=
+sign define DiagnosticSignHint  text= texthl=DiagnosticHint  linehl= numhl=
+
 let g:neoformat_enabled_ruby = ['rubocop']
 let g:neoformat_enabled_haskell = ['stylishhaskell']
+
+" [nvim-tree colours]
+hi NvimTreeLspDiagnosticsError guifg=#88088F
+hi NvimTreeLspDiagnosticsWarning guifg=DarkOrange
+hi NvimTreeLspDiagnosticsInformation guifg=Blue      
+hi NvimTreeLspDiagnosticsHint guifg=Green
 
 " [Vim-cmp]
 set completeopt=menu,menuone,noselect
@@ -189,7 +204,7 @@ imap kj <Esc>
 nnoremap <leader>b :ls<CR>:b<Space>
 tnoremap <Esc> <C-\><C-n>
 noremap <space> :
-command Nt :NERDTree
+command Nt :NvimTreeFocus
 command Fmt :Neoformat
 nnoremap <C-P> :Telescope find_files<CR>
 nnoremap <leader>g :Telescope live_grep<CR>
