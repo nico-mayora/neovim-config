@@ -28,6 +28,10 @@ Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 Plug 'rafamadriz/friendly-snippets'
 
+Plug 'antoinemadec/FixCursorHold.nvim' " workaround
+Plug 'nvim-neotest/neotest' " testing framework
+Plug 'olimorris/neotest-rspec' " rspec adapter
+
 Plug 'goolord/alpha-nvim' " fancy startup
 Plug 'neovim/nvim-lspconfig' " lsp
 Plug 'nvim-lualine/lualine.nvim' " bottom bar
@@ -71,6 +75,7 @@ require('buffline_cfg')
 require('treesitter')
 require('telescope_cfg')
 require('startup_cfg')
+require('neotest_cfg')
 EOF
 
 " [snippets]
@@ -153,6 +158,7 @@ map <F5> :source Session.vim<CR>
 map <F9> :nohl<CR>
 map <F10> :wa<CR>
 nnoremap <leader>ss <cmd>lua require('telescope.builtin').treesitter()<cr>
+nnoremap <F8> <cmd>lua require('neotest').summary.toggle()<cr>
 
 " Use ctrl-[hjkl] to select the active split!
 nmap <silent> <c-k> :wincmd k<CR>
