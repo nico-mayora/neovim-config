@@ -116,8 +116,8 @@ let g:copilot_filetypes = {
       \ }
 
 " [Gutentags]
-let g:gutentags_enabled = 1
-let g:gutentags_project_root = ['Gemfile'] 
+let g:gutentags_enabled = 0
+" let g:gutentags_project_root = ['Gemfile'] 
 
 " [Easymotion config] 
 let g:EasyMotion_do_mapping = 1
