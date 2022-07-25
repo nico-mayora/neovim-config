@@ -32,8 +32,10 @@ Plug 'antoinemadec/FixCursorHold.nvim' " workaround
 Plug 'nvim-neotest/neotest' " testing framework
 Plug 'olimorris/neotest-rspec' " rspec adapter
 
-Plug 'goolord/alpha-nvim' " fancy startup
 Plug 'neovim/nvim-lspconfig' " lsp
+Plug 'williamboman/nvim-lsp-installer' " gui for managing lsp servers
+
+Plug 'goolord/alpha-nvim' " fancy startup
 Plug 'nvim-lualine/lualine.nvim' " bottom bar
 Plug 'kyazdani42/nvim-web-devicons' " better icons
 Plug 'akinsho/bufferline.nvim' " better buffline
@@ -62,7 +64,6 @@ Plug 'vlime/vlime', {'rtp': 'vim/'} " Common lisp integration
 Plug 'bhurlow/vim-parinfer'
 
 Plug 'sbdchd/neoformat' " Formatting
-
 call plug#end()
 
 " [Load lua config files]
