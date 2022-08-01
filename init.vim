@@ -17,6 +17,12 @@ augroup highlight_yank
   autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank()
 augroup END
 
+lua << EOF
+vim.g.gui_font_default_size = 12
+vim.g.gui_font_size = vim.g.gui_font_default_size
+vim.g.gui_font_face = "JetBransMono Nerd Font"
+EOF
+
 " [Plugins]
 call plug#begin()
 " vim-cmp & vsnip
