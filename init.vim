@@ -117,13 +117,13 @@ set completeopt=menu,menuone,noselect
 "see lua file for more
 
 " [Copilot]
+let g:copilot_enabled = 0
 let g:copilot_filetypes = {
       \ '*': v:false,
-      \ 'ruby': v:true,
       \ }
 
 " [Gutentags]
-let g:gutentags_enabled = 1
+let g:gutentags_enabled = 0 " set up and reenable
 let g:gutentags_project_root = ['Gemfile'] 
 
 " [Easymotion config] 
