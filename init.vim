@@ -43,19 +43,19 @@ Plug 'williamboman/nvim-lsp-installer' " gui for managing lsp servers
 
 Plug 'goolord/alpha-nvim' " fancy startup
 Plug 'nvim-lualine/lualine.nvim' " bottom bar
-Plug 'kyazdani42/nvim-web-devicons' " better icons
+Plug 'kyazdani42/nvim-tree.lua' " fs explorer
 Plug 'akinsho/bufferline.nvim' " better buffline
-Plug 'tpope/vim-fugitive' " Git integration (for airline)
-Plug 'lukas-reineke/indent-blankline.nvim' "Indentation guides
+Plug 'tpope/vim-fugitive' " Git integration
+
+Plug 'kyazdani42/nvim-web-devicons' " better icons
+Plug 'lukas-reineke/indent-blankline.nvim' " Indentation guides
 Plug 'tpope/vim-obsession' " Better session management
-Plug 'tpope/vim-surround' "Surround commands
-Plug 'ludovicchabant/vim-gutentags' "Tag generation and maintainance
-Plug 'https://github.com/vim-ruby/vim-ruby' "Ruby integration
-Plug 'https://github.com/tpope/vim-commentary' "For Commenting gcc
-Plug 'rafi/awesome-vim-colorschemes' "colour schemes
-Plug 'kyazdani42/nvim-tree.lua' "fs explorer
-Plug 'https://github.com/tpope/vim-rails' "rails utilities
-Plug 'https://github.com/tpope/vim-endwise' "autoappend do, then, end, etc
+Plug 'tpope/vim-surround' " Surround commands
+Plug 'ludovicchabant/vim-gutentags' " Tag generation and maintainance
+Plug 'vim-ruby/vim-ruby' " Ruby integration
+Plug 'tpope/vim-rails' "rails utilities
+Plug 'tpope/vim-commentary' " For Commenting gcc
+Plug 'tpope/vim-endwise' "autoappend do, then, end, etc
 Plug 'easymotion/vim-easymotion' "better motion
 Plug 'nvim-lua/plenary.nvim' " Lua functions
 Plug 'nvim-telescope/telescope.nvim' " Fuzzy finder
@@ -64,12 +64,14 @@ Plug 'sainnhe/gruvbox-material' " gruvbox with treesitter support
 " telescope fzf behaviour
 Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' } 
 Plug 'github/copilot.vim' " Copilot integration
-Plug 'https://gitlab.com/__tpb/monokai-pro.nvim' " good theme
-
-Plug 'vlime/vlime', {'rtp': 'vim/'} " Common lisp integration
-Plug 'bhurlow/vim-parinfer'
 
 Plug 'sbdchd/neoformat' " Formatting
+
+" Colourschemes
+Plug 'https://gitlab.com/__tpb/monokai-pro.nvim'
+Plug 'navarasu/onedark.nvim'
+
+Plug 'folke/lsp-colors.nvim' " LSP colours
 call plug#end()
 
 " [Load lua config files]
@@ -107,10 +109,10 @@ let g:neoformat_enabled_ruby = ['rubocop']
 let g:neoformat_enabled_haskell = ['stylishhaskell']
 
 " [nvim-tree colours]
-hi NvimTreeLspDiagnosticsError guifg=#88088F
-hi NvimTreeLspDiagnosticsWarning guifg=DarkOrange
-hi NvimTreeLspDiagnosticsInformation guifg=Blue      
-hi NvimTreeLspDiagnosticsHint guifg=Green
+" hi NvimTreeLspDiagnosticsError guifg=#88088F
+" hi NvimTreeLspDiagnosticsWarning guifg=DarkOrange
+" hi NvimTreeLspDiagnosticsInformation guifg=Blue      
+" hi NvimTreeLspDiagnosticsHint guifg=Green
 
 " [Vim-cmp]
 set completeopt=menu,menuone,noselect
@@ -137,9 +139,10 @@ set undofile
 " Also github.com/rockerBOO/awesome-neovim#tree-sitter-supported-colorscheme
 " Good ones -> anderson, sonokai, gruvbox, palenight, monokai
 set termguicolors
-
-let g:monokaipro_filter = 'machine'
-colorscheme monokaipro
+let g:onedark_config = {
+    \ 'style': 'cool',
+\}
+colorscheme onedark
 
 " [Folding]
 set nofoldenable
