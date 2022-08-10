@@ -18,9 +18,9 @@ augroup highlight_yank
 augroup END
 
 lua << EOF
-vim.g.gui_font_default_size = 12
-vim.g.gui_font_size = vim.g.gui_font_default_size
-vim.g.gui_font_face = "JetBransMono Nerd Font"
+-- vim.g.gui_font_default_size = 12
+-- vim.g.gui_font_size = vim.g.gui_font_default_size
+-- vim.g.gui_font_face = "JetBransMono Nerd Font"
 EOF
 
 " [Plugins]
@@ -72,6 +72,7 @@ Plug 'https://gitlab.com/__tpb/monokai-pro.nvim'
 Plug 'navarasu/onedark.nvim'
 
 Plug 'folke/lsp-colors.nvim' " LSP colours
+Plug 'folke/trouble.nvim' " Diagnostics view
 call plug#end()
 
 " [Load lua config files]
@@ -85,6 +86,7 @@ require('treesitter')
 require('telescope_cfg')
 require('startup_cfg')
 require('neotest_cfg')
+require("trouble").setup()
 EOF
 
 " [snippets]
@@ -107,12 +109,6 @@ sign define DiagnosticSignHint  text= texthl=DiagnosticHint  linehl= numhl=
 
 let g:neoformat_enabled_ruby = ['rubocop']
 let g:neoformat_enabled_haskell = ['stylishhaskell']
-
-" [nvim-tree colours]
-" hi NvimTreeLspDiagnosticsError guifg=#88088F
-" hi NvimTreeLspDiagnosticsWarning guifg=DarkOrange
-" hi NvimTreeLspDiagnosticsInformation guifg=Blue      
-" hi NvimTreeLspDiagnosticsHint guifg=Green
 
 " [Vim-cmp]
 set completeopt=menu,menuone,noselect
@@ -175,3 +171,11 @@ nmap <silent> <c-k> :wincmd k<CR>
 nmap <silent> <c-j> :wincmd j<CR>
 nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
+
+" Trouble keymaps
+nnoremap <leader>xx <cmd>TroubleToggle<cr>
+nnoremap <leader>xw <cmd>TroubleToggle workspace_diagnostics<cr>
+nnoremap <leader>xd <cmd>TroubleToggle document_diagnostics<cr>
+nnoremap <leader>xq <cmd>TroubleToggle quickfix<cr>
+nnoremap <leader>xl <cmd>TroubleToggle loclist<cr>
+nnoremap gR <cmd>TroubleToggle lsp_references<cr>
