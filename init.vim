@@ -1,4 +1,11 @@
-" [Basic config]
+" Neovim configuration.
+" Huge thank you to every FOSS contributor who made this editor a reality.
+" Nicolás Mayora 2021-2022.
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Basic configuration
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 set number
 set cursorline
 highlight clear CursorLine
@@ -12,70 +19,74 @@ set noshowmode
 set signcolumn=yes
 set updatetime=100
 
+" Highlight yanked text
 augroup highlight_yank
   autocmd!
   autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank()
 augroup END
 
-lua << EOF
--- vim.g.gui_font_default_size = 12
--- vim.g.gui_font_size = vim.g.gui_font_default_size
--- vim.g.gui_font_face = "JetBransMono Nerd Font"
-EOF
+" Use persistent history
+set undodir=~/.config/nvim/undodir
+set undofile
 
-" [Plugins]
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Vim Plug for Plugin Management
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 call plug#begin()
-" vim-cmp & vsnip
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/nvim-cmp'
-Plug 'hrsh7th/cmp-vsnip'
-Plug 'hrsh7th/vim-vsnip'
-Plug 'rafamadriz/friendly-snippets'
 
-Plug 'antoinemadec/FixCursorHold.nvim' " workaround
-Plug 'nvim-neotest/neotest' " testing framework
-Plug 'olimorris/neotest-rspec' " rspec adapter
+" {{ Basic utilities }}
+    Plug 'nvim-telescope/telescope.nvim'                        " Fuzzy finder
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " Better syntax highlighting
+    Plug 'ludovicchabant/vim-gutentags'                         " Tag generation and maintainance
+    Plug 'nvim-lua/plenary.nvim'                                " Lua functions
+    Plug 'tpope/vim-commentary'                                 " For Commenting gcc
+    Plug 'tpope/vim-surround'                                   " Surround commands
+    Plug 'tpope/vim-endwise'                                    " Autoappend do, then, end, etc
+    Plug 'easymotion/vim-easymotion'                            " Better motion
+" {{ Productivity }}
+    Plug 'kyazdani42/nvim-tree.lua'                             " Fs explorer
+    Plug 'tpope/vim-fugitive'                                   " Git integration
+    Plug 'tpope/vim-obsession'                                  " Better session management
+    Plug 'nvim-telescope/telescope-fzf-native.nvim',            " Telescope fzf
+        \ { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' } 
+    Plug 'folke/trouble.nvim'                                   " Diagnostics view
+" {{ LSP & autocompletion }}
+    Plug 'neovim/nvim-lspconfig'                                " LSP config
+    Plug 'williamboman/nvim-lsp-installer'                      " Gui for managing lsp servers
+    " Misc. autocomplete sources
+    Plug 'hrsh7th/cmp-nvim-lsp'                         
+    Plug 'hrsh7th/cmp-buffer'                                  
+    Plug 'hrsh7th/cmp-path'                                     
+    Plug 'hrsh7th/nvim-cmp' 
+    Plug 'hrsh7th/cmp-vsnip'
+    Plug 'hrsh7th/vim-vsnip'
+    Plug 'rafamadriz/friendly-snippets'                         " Snippets support
+    Plug 'github/copilot.vim'                                   " Copilot integration
+    Plug 'sbdchd/neoformat'                                     " Autoformatting
+" {{ Work-specific }}
+    Plug 'antoinemadec/FixCursorHold.nvim'                      " Workaround fix
+    Plug 'nvim-neotest/neotest'                                 " Testing framework
+    Plug 'olimorris/neotest-rspec'                              " Rspec adapter
+    Plug 'tpope/vim-rails'                                      " rails utilities
+    Plug 'vim-ruby/vim-ruby'                                    " Ruby integration
+" {{ Appearance }}
+    Plug 'goolord/alpha-nvim'                                   " Fancy startup
+    Plug 'akinsho/bufferline.nvim'                              " Better buffline
+    Plug 'nvim-lualine/lualine.nvim'                            " Bottom bar
+    Plug 'kyazdani42/nvim-web-devicons'                         " Better icons
+    Plug 'lukas-reineke/indent-blankline.nvim'                  " Indentation guides
+    Plug 'sainnhe/gruvbox-material'                             " Gruvbox with treesitter support
+    Plug 'https://gitlab.com/__tpb/monokai-pro.nvim'            " Monokai pro theme
+    Plug 'navarasu/onedark.nvim'                                " Onedark theme
+    Plug 'folke/lsp-colors.nvim'                                " LSP colours
 
-Plug 'neovim/nvim-lspconfig' " lsp
-Plug 'williamboman/nvim-lsp-installer' " gui for managing lsp servers
-
-Plug 'goolord/alpha-nvim' " fancy startup
-Plug 'nvim-lualine/lualine.nvim' " bottom bar
-Plug 'kyazdani42/nvim-tree.lua' " fs explorer
-Plug 'akinsho/bufferline.nvim' " better buffline
-Plug 'tpope/vim-fugitive' " Git integration
-
-Plug 'kyazdani42/nvim-web-devicons' " better icons
-Plug 'lukas-reineke/indent-blankline.nvim' " Indentation guides
-Plug 'tpope/vim-obsession' " Better session management
-Plug 'tpope/vim-surround' " Surround commands
-Plug 'ludovicchabant/vim-gutentags' " Tag generation and maintainance
-Plug 'vim-ruby/vim-ruby' " Ruby integration
-Plug 'tpope/vim-rails' "rails utilities
-Plug 'tpope/vim-commentary' " For Commenting gcc
-Plug 'tpope/vim-endwise' "autoappend do, then, end, etc
-Plug 'easymotion/vim-easymotion' "better motion
-Plug 'nvim-lua/plenary.nvim' " Lua functions
-Plug 'nvim-telescope/telescope.nvim' " Fuzzy finder
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " Better syntax highlighting
-Plug 'sainnhe/gruvbox-material' " gruvbox with treesitter support
-" telescope fzf behaviour
-Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' } 
-Plug 'github/copilot.vim' " Copilot integration
-
-Plug 'sbdchd/neoformat' " Formatting
-
-" Colourschemes
-Plug 'https://gitlab.com/__tpb/monokai-pro.nvim'
-Plug 'navarasu/onedark.nvim'
-
-Plug 'folke/lsp-colors.nvim' " LSP colours
-Plug 'folke/trouble.nvim' " Diagnostics view
 call plug#end()
 
-" [Load lua config files]
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Run configuration for lua plugins
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 lua << EOF
 require('nvim-tree_cfg')
 require('nvim-cmp')
@@ -89,12 +100,16 @@ require('neotest_cfg')
 require("trouble").setup()
 EOF
 
-" [snippets]
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => VimL configuration
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Snippets
 if (&ft=='rb')
     :let g:vsnip_filetypes.ruby = ['rails']
 endif
 
-" [LSP & formatter]
+" LSP & formatter
 autocmd FileType ruby setlocal omnifunc=LanguageClient#complete
 
 hi DiagnosticError guifg=#88088F
@@ -110,63 +125,72 @@ sign define DiagnosticSignHint  text= texthl=DiagnosticHint  linehl= numhl=
 let g:neoformat_enabled_ruby = ['rubocop']
 let g:neoformat_enabled_haskell = ['stylishhaskell']
 
-" [Vim-cmp]
+" Vim-cmp
+    "see lua file for more
 set completeopt=menu,menuone,noselect
-"see lua file for more
 
-" [Copilot]
+" GitHub Copilot
 let g:copilot_filetypes = {
       \ '*': v:false,
       \ 'ruby': v:true,
       \ }
 
-" [Gutentags]
+" Gutentags
 let g:gutentags_enabled = 1
 let g:gutentags_project_root = ['Gemfile'] 
 
-" [Easymotion config] 
+" Easymotion config
 let g:EasyMotion_do_mapping = 1
 
-" [Use persistent history]
-set undodir=~/.config/nvim/undodir
-set undofile
+" Folding
+set nofoldenable
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
 
-" [Set theme] vimcolorschemes.com
-" Also github.com/rockerBOO/awesome-neovim#tree-sitter-supported-colorscheme
-" Good ones -> anderson, sonokai, gruvbox, palenight, monokai
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Set current theme
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 set termguicolors
 let g:onedark_config = {
     \ 'style': 'cool',
 \}
 colorscheme onedark
 
-" [Folding]
-set nofoldenable
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
 
-" [Custom mappings]
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Configure custom mappings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 let mapleader = ","
+
 nnoremap k gk
 nnoremap j gj
+
 imap jk <Esc>
 imap kj <Esc>
 nnoremap <leader>b :ls<CR>:b<Space>
 tnoremap <Esc> <C-\><C-n>
 noremap <space> :
-command Nt :NvimTreeFocus
-command Fmt :Neoformat
-nnoremap <C-P> :Telescope find_files<CR>
-nnoremap <leader>g :Telescope live_grep<CR>
+
+"Navigate open buffers
 nnoremap <leader>d :bp<CR>
 nnoremap <leader>f :bn<CR>
+
 map <F5> :source Session.vim<CR>
 map <F9> :nohl<CR>
 map <F10> :wa<CR>
-nnoremap <leader>ss <cmd>lua require('telescope.builtin').treesitter()<cr>
 nnoremap <F8> <cmd>lua require('neotest').summary.toggle()<cr>
 
-" Use ctrl-[hjkl] to select the active split!
+nnoremap <leader>ss <cmd>lua require('telescope.builtin').treesitter()<cr>
+nnoremap <leader>g :Telescope live_grep<CR>
+nnoremap <C-P> :Telescope find_files<CR>
+
+" Custom commands
+command Nt :NvimTreeFocus
+command Fmt :Neoformat
+
+" Use ctrl-[hjkl] to select the active split
 nmap <silent> <c-k> :wincmd k<CR>
 nmap <silent> <c-j> :wincmd j<CR>
 nmap <silent> <c-h> :wincmd h<CR>
