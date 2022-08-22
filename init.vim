@@ -169,7 +169,6 @@ nnoremap j gj
 
 imap jk <Esc>
 imap kj <Esc>
-nnoremap <leader>b :ls<CR>:b<Space>
 tnoremap <Esc> <C-\><C-n>
 noremap <space> :
 
@@ -182,7 +181,8 @@ map <F9> :nohl<CR>
 map <F10> :wa<CR>
 nnoremap <F8> <cmd>lua require('neotest').summary.toggle()<cr>
 
-nnoremap <leader>ss <cmd>lua require('telescope.builtin').treesitter()<cr>
+nnoremap <leader>ss :lua require('telescope.builtin').treesitter()<cr>
+nnoremap <leader>b :Telescope buffers<cr>
 nnoremap <leader>g :Telescope live_grep<CR>
 nnoremap <C-P> :Telescope find_files<CR>
 
