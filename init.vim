@@ -48,8 +48,7 @@ call plug#begin()
     Plug 'kyazdani42/nvim-tree.lua'                             " Fs explorer
     Plug 'tpope/vim-fugitive'                                   " Git integration
     Plug 'tpope/vim-obsession'                                  " Better session management
-    Plug 'nvim-telescope/telescope-fzf-native.nvim',            " Telescope fzf
-        \ { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' } 
+    Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
     Plug 'folke/trouble.nvim'                                   " Diagnostics view
 " {{ LSP & autocompletion }}
     Plug 'neovim/nvim-lspconfig'                                " LSP config
@@ -136,8 +135,8 @@ let g:copilot_filetypes = {
       \ }
 
 " Gutentags
-let g:gutentags_enabled = 1
-let g:gutentags_project_root = ['Gemfile'] 
+let g:gutentags_enabled = 0
+" let g:gutentags_project_root = ['Gemfile'] 
 
 " Easymotion config
 let g:EasyMotion_do_mapping = 1
