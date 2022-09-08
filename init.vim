@@ -49,6 +49,7 @@ call plug#begin()
     Plug 'tpope/vim-fugitive'                                   " Git integration
     Plug 'tpope/vim-obsession'                                  " Better session management
     Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+    Plug 'stevearc/aerial.nvim'                                 " Outliner
 " {{ LSP & autocompletion }}
     Plug 'neovim/nvim-lspconfig'                                " LSP config
     Plug 'williamboman/nvim-lsp-installer'                      " Gui for managing lsp servers
@@ -97,6 +98,7 @@ require('telescope_cfg')
 require('startup_cfg')
 require('neotest_cfg')
 require('todo-comments').setup()
+require('aerial').setup {} 
 EOF
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -135,8 +137,8 @@ let g:copilot_filetypes = {
       \ }
 
 " Gutentags
-let g:gutentags_enabled = 0
-" let g:gutentags_project_root = ['Gemfile'] 
+let g:gutentags_enabled = 1
+let g:gutentags_project_root = ['Gemfile'] 
 
 " Easymotion config
 let g:EasyMotion_do_mapping = 1
@@ -171,10 +173,11 @@ imap kj <Esc>
 tnoremap <Esc> <C-\><C-n>
 noremap <space> :
 
-nnoremap gd <cmd>lua vim.lsp.buf.definition()<CR>
+" Go to definition
 nnoremap gD <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap gd <cmd>lua vim.lsp.buf.definition()<CR>
 
-"Navigate open buffers
+" Navigate open buffers
 nnoremap <leader>d :bp<CR>
 nnoremap <leader>f :bn<CR>
 
@@ -186,6 +189,7 @@ nnoremap <F8> <cmd>lua require('neotest').summary.toggle()<CR>
 nnoremap <leader>ss :lua require('telescope.builtin').treesitter()<cr>
 nnoremap <leader>b :Telescope buffers<cr>
 nnoremap <leader>g :Telescope live_grep<CR>
+nnoremap <leader>a :AerialToggle!<CR>
 nnoremap <C-P> :Telescope find_files<CR>
 
 " Custom commands
@@ -197,3 +201,11 @@ nmap <silent> <c-k> :wincmd k<CR>
 nmap <silent> <c-j> :wincmd j<CR>
 nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
+
+" Trouble keymaps
+nnoremap <leader>xx <cmd>TroubleToggle<cr>
+nnoremap <leader>xw <cmd>TroubleToggle workspace_diagnostics<cr>
+nnoremap <leader>xd <cmd>TroubleToggle document_diagnostics<cr>
+nnoremap <leader>xq <cmd>TroubleToggle quickfix<cr>
+nnoremap <leader>xl <cmd>TroubleToggle loclist<cr>
+nnoremap gR <cmd>TroubleToggle lsp_references<cr>
