@@ -52,7 +52,8 @@ call plug#begin()
     Plug 'stevearc/aerial.nvim'                                 " Outliner
 " {{ LSP & autocompletion }}
     Plug 'neovim/nvim-lspconfig'                                " LSP config
-    Plug 'williamboman/nvim-lsp-installer'                      " Gui for managing lsp servers
+    Plug 'williamboman/mason.nvim'                              " LSP/format/dap interface
+    Plug 'williamboman/mason-lspconfig.nvim'                    " Mason LSP
     " Misc. autocomplete sources
     Plug 'hrsh7th/cmp-nvim-lsp'                         
     Plug 'hrsh7th/cmp-buffer'                                  
