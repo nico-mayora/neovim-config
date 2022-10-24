@@ -7,7 +7,12 @@ require("mason").setup {
 }
 
 require("mason-lspconfig").setup {
-    ensure_installed = { "hls", "solargraph", "rust-analyzer" },
+    ensure_installed = { "hls", "solargraph", "rust_analyzer" },
+}
+
+require('lspconfig')['hls'].setup{
+    on_attach = on_attach,
+    flags = lsp_flags,
 }
 
 vim.diagnostic.config({ virtual_text = false,}) -- Turn off inline diagnostics

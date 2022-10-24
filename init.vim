@@ -52,8 +52,10 @@ call plug#begin()
     Plug 'stevearc/aerial.nvim'                                 " Outliner
 " {{ LSP & autocompletion }}
     Plug 'neovim/nvim-lspconfig'                                " LSP config
-    Plug 'williamboman/mason.nvim'                              " LSP/format/dap interface
+    Plug 'williamboman/mason.nvim'                              " LSP/format/dap installer
     Plug 'williamboman/mason-lspconfig.nvim'                    " Mason LSP
+    Plug 'mfussenegger/nvim-dap'                                " Debug adapter protocol
+    Plug 'rcarriga/nvim-dap-ui'                                 " In-editor interface for nvim-dap
     " Misc. autocomplete sources
     Plug 'hrsh7th/cmp-nvim-lsp'                         
     Plug 'hrsh7th/cmp-buffer'                                  
@@ -98,20 +100,20 @@ require('treesitter')
 require('telescope_cfg')
 require('startup_cfg')
 require('neotest_cfg')
+require('dap_cfg')
 require('todo-comments').setup()
 require('aerial').setup {} 
 EOF
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => VimL configuration
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Snippets
+" => VimL configuration "
+
+" Snippets "
 if (&ft=='rb')
     :let g:vsnip_filetypes.ruby = ['rails']
 endif
 
-" LSP & formatter
+" LSP & formatter "
 autocmd FileType ruby setlocal omnifunc=LanguageClient#complete
 
 hi DiagnosticError guifg=#88088F
@@ -127,31 +129,31 @@ sign define DiagnosticSignHint  text= texthl=DiagnosticHint  linehl= numhl=
 let g:neoformat_enabled_ruby = ['rubocop']
 let g:neoformat_enabled_haskell = ['stylishhaskell']
 
-" Vim-cmp
-    "see lua file for more
+" Vim-cmp "
+    "see lua file for more "
 set completeopt=menu,menuone,noselect
 
-" GitHub Copilot
+" GitHub Copilot "
 let g:copilot_filetypes = {
       \ '*': v:false,
       \ 'ruby': v:true,
       \ }
 
-" Gutentags
+" Gutentags "
 let g:gutentags_enabled = 1
 let g:gutentags_project_root = ['Gemfile'] 
 
-" Easymotion config
+" Easymotion config "
 let g:EasyMotion_do_mapping = 1
 
-" Folding
+" Folding "
 set nofoldenable
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Set current theme
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" -------------------- "
+" => Set current theme "
+" -------------------- "
 
 set termguicolors
 let g:onedark_config = {
@@ -160,9 +162,9 @@ let g:onedark_config = {
 colorscheme onedark
 
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" => Configure custom mappings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ---------------------------- "
+" => Configure custom mappings "
+" ---------------------------- "
 
 let mapleader = ","
 
@@ -174,11 +176,11 @@ imap kj <Esc>
 tnoremap <Esc> <C-\><C-n>
 noremap <space> :
 
-" Go to definition
+" Go to definition "
 nnoremap gD <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap gd <cmd>lua vim.lsp.buf.definition()<CR>
 
-" Navigate open buffers
+" Navigate open buffers "
 nnoremap <leader>d :bp<CR>
 nnoremap <leader>f :bn<CR>
 
@@ -188,22 +190,23 @@ map <F10> :wa<CR>
 nnoremap <F8> <cmd>lua require('neotest').summary.toggle()<CR>
 
 nnoremap <leader>ss :lua require('telescope.builtin').treesitter()<cr>
+nnoremap <leader>r :Telescope registers<cr>
 nnoremap <leader>b :Telescope buffers<cr>
 nnoremap <leader>g :Telescope live_grep<CR>
 nnoremap <leader>a :AerialToggle!<CR>
 nnoremap <C-P> :Telescope find_files<CR>
 
-" Custom commands
+" Custom commands "
 command Nt :NvimTreeFocus
 command Fmt :Neoformat
 
-" Use ctrl-[hjkl] to select the active split
+" Use ctrl-[hjkl] to select the active split "
 nmap <silent> <c-k> :wincmd k<CR>
 nmap <silent> <c-j> :wincmd j<CR>
 nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
 
-" Trouble keymaps
+" Trouble keymaps "
 nnoremap <leader>xx <cmd>TroubleToggle<cr>
 nnoremap <leader>xw <cmd>TroubleToggle workspace_diagnostics<cr>
 nnoremap <leader>xd <cmd>TroubleToggle document_diagnostics<cr>
