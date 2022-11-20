@@ -45,6 +45,7 @@ call plug#begin()
     Plug 'tpope/vim-endwise'                                    " Autoappend do, then, end, etc
     Plug 'easymotion/vim-easymotion'                            " Better motion
 " {{ Productivity }}
+    Plug 'lewis6991/gitsigns.nvim'
     Plug 'kyazdani42/nvim-tree.lua'                             " Fs explorer
     Plug 'tpope/vim-fugitive'                                   " Git integration
     Plug 'tpope/vim-obsession'                                  " Better session management
@@ -103,6 +104,7 @@ require('neotest_cfg')
 require('dap_cfg')
 require('todo-comments').setup()
 require('aerial').setup {} 
+require('gitsigns').setup()
 EOF
 
 
@@ -155,12 +157,18 @@ set foldexpr=nvim_treesitter#foldexpr()
 " => Set current theme "
 " -------------------- "
 
-set termguicolors
-let g:onedark_config = {
-    \ 'style': 'cool',
-\}
-colorscheme onedark
+" set termguicolors
+" let g:onedark_config = {
+"     \ 'style': 'cool',
+" \}
+" colorscheme onedark "
 
+
+let g:monokaipro_filter = "spectrum"
+let g:monokaipro_italic_functions = 1
+let g:monokaipro_sidebars = [ "nvim-tree" ]
+
+colorscheme monokaipro
 
 " ---------------------------- "
 " => Configure custom mappings "
