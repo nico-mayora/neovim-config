@@ -18,6 +18,7 @@ set expandtab
 set noshowmode
 set signcolumn=yes
 set updatetime=100
+let mapleader = ","
 
 " Highlight yanked text
 augroup highlight_yank
@@ -139,6 +140,7 @@ set completeopt=menu,menuone,noselect
 let g:copilot_filetypes = {
       \ '*': v:false,
       \ 'ruby': v:true,
+      \ 'haskell': v:true,
       \ }
 
 " Gutentags "
@@ -152,6 +154,8 @@ let g:EasyMotion_do_mapping = 1
 set nofoldenable
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
+autocmd BufReadPost,FileReadPost * normal zR
+nnoremap <leader>v za
 
 " -------------------- "
 " => Set current theme "
@@ -161,8 +165,7 @@ set foldexpr=nvim_treesitter#foldexpr()
 " let g:onedark_config = {
 "     \ 'style': 'cool',
 " \}
-" colorscheme onedark "
-
+" colorscheme onedark 
 
 let g:monokaipro_filter = "spectrum"
 let g:monokaipro_italic_functions = 1
@@ -173,8 +176,6 @@ colorscheme monokaipro
 " ---------------------------- "
 " => Configure custom mappings "
 " ---------------------------- "
-
-let mapleader = ","
 
 nnoremap k gk
 nnoremap j gj
