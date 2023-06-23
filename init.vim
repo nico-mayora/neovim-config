@@ -19,6 +19,7 @@ set noshowmode
 set signcolumn=yes
 set updatetime=100
 let mapleader = ","
+set iskeyword-=_
 
 " Highlight yanked text
 augroup highlight_yank
@@ -45,9 +46,13 @@ call plug#begin()
     Plug 'tpope/vim-surround'                                   " Surround commands
     Plug 'tpope/vim-endwise'                                    " Autoappend do, then, end, etc
     Plug 'easymotion/vim-easymotion'                            " Better motion
+    Plug 'kevinhwang91/nvim-ufo'                                " Improve folding
+    Plug 'kevinhwang91/promise-async'                           " Required for ^^^
 " {{ Productivity }}
+    Plug 'akinsho/git-conflict.nvim'                            " Resolve git conflicts
     Plug 'lewis6991/gitsigns.nvim'
-    Plug 'kyazdani42/nvim-tree.lua'                             " Fs explorer
+    Plug 'nvim-neo-tree/neo-tree.nvim'                          " Fs explorer
+    Plug 'MunifTanjim/nui.nvim'
     Plug 'tpope/vim-fugitive'                                   " Git integration
     Plug 'tpope/vim-obsession'                                  " Better session management
     Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
@@ -82,9 +87,10 @@ call plug#begin()
     Plug 'kyazdani42/nvim-web-devicons'                         " Better icons
     Plug 'lukas-reineke/indent-blankline.nvim'                  " Indentation guides
     Plug 'sainnhe/gruvbox-material'                             " Gruvbox with treesitter support
-    Plug 'https://gitlab.com/__tpb/monokai-pro.nvim'            " Monokai pro theme
+    Plug 'loctvl842/monokai-pro.nvim'                           " Monokai pro theme
     Plug 'navarasu/onedark.nvim'                                " Onedark theme
     Plug 'folke/lsp-colors.nvim'                                " LSP colours
+    Plug 'catppuccin/nvim', { 'as': 'catppuccin' }              " Catpucchin theme
 
 call plug#end()
 
@@ -92,20 +98,13 @@ call plug#end()
 " => Run configuration for lua plugins
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
+runtime! lua/*.lua
+
 lua << EOF
-require('nvim-tree_cfg')
-require('nvim-cmp')
-require('lualine_cfg')
-require('lsp_cfg')
-require('buffline_cfg')
-require('treesitter')
-require('telescope_cfg')
-require('startup_cfg')
-require('neotest_cfg')
-require('dap_cfg')
 require('todo-comments').setup()
 require('aerial').setup {} 
 require('gitsigns').setup()
+require('git-conflict').setup()
 EOF
 
 
@@ -150,28 +149,24 @@ let g:gutentags_project_root = ['Gemfile']
 " Easymotion config "
 let g:EasyMotion_do_mapping = 1
 
-" Folding "
-set nofoldenable
-set foldmethod=expr
-set foldexpr=nvim_treesitter#foldexpr()
-autocmd BufReadPost,FileReadPost * normal zR
-nnoremap <leader>v za
-
 " -------------------- "
 " => Set current theme "
 " -------------------- "
+set termguicolors
 
-" set termguicolors
+" {{ Onedark }}
 " let g:onedark_config = {
 "     \ 'style': 'cool',
 " \}
 " colorscheme onedark 
 
-let g:monokaipro_filter = "spectrum"
-let g:monokaipro_italic_functions = 1
-let g:monokaipro_sidebars = [ "nvim-tree" ]
+" {{ Monokai Pro }}
+" let g:monokaipro_filter = "spectrum"
+" let g:monokaipro_italic_functions = 1
+" let g:monokaipro_sidebars = [ "nvim-tree" ]
+" colorscheme monokaipro
 
-colorscheme monokaipro
+colorscheme catppuccin-macchiato
 
 " ---------------------------- "
 " => Configure custom mappings "
@@ -183,11 +178,15 @@ nnoremap j gj
 imap jk <Esc>
 imap kj <Esc>
 tnoremap <Esc> <C-\><C-n>
-noremap <space> :
+nnoremap <space> :
+nnoremap <C-Space> za
+nnoremap <C-n> :Neotree<CR>
 
 " Go to definition "
 nnoremap gD <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap gd <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap ^] gd
+nnoremap K <cmd>lua vim.lsp.buf.hover()<CR>
 
 " Navigate open buffers "
 nnoremap <leader>d :bp<CR>
@@ -206,7 +205,7 @@ nnoremap <leader>a :AerialToggle!<CR>
 nnoremap <C-P> :Telescope find_files<CR>
 
 " Custom commands "
-command Nt :NvimTreeFocus
+command Nt :Neotree
 command Fmt :Neoformat
 
 " Use ctrl-[hjkl] to select the active split "
@@ -214,11 +213,3 @@ nmap <silent> <c-k> :wincmd k<CR>
 nmap <silent> <c-j> :wincmd j<CR>
 nmap <silent> <c-h> :wincmd h<CR>
 nmap <silent> <c-l> :wincmd l<CR>
-
-" Trouble keymaps "
-nnoremap <leader>xx <cmd>TroubleToggle<cr>
-nnoremap <leader>xw <cmd>TroubleToggle workspace_diagnostics<cr>
-nnoremap <leader>xd <cmd>TroubleToggle document_diagnostics<cr>
-nnoremap <leader>xq <cmd>TroubleToggle quickfix<cr>
-nnoremap <leader>xl <cmd>TroubleToggle loclist<cr>
-nnoremap gR <cmd>TroubleToggle lsp_references<cr>

@@ -7,7 +7,7 @@ require("mason").setup {
 }
 
 require("mason-lspconfig").setup {
-    ensure_installed = { "hls", "solargraph", "rust_analyzer" },
+    ensure_installed = { "hls", "solargraph", "rust_analyzer", "tsserver" },
 }
 
 require('lspconfig')['hls'].setup{
@@ -21,6 +21,11 @@ require('lspconfig')['rust_analyzer'].setup{
 }
 
 require('lspconfig')['solargraph'].setup {
+    on_attach = on_attach,
+    flags = lsp_flags,
+}
+
+require('lspconfig')['tsserver'].setup {
     on_attach = on_attach,
     flags = lsp_flags,
 }
