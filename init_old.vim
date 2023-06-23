@@ -153,19 +153,6 @@ let g:EasyMotion_do_mapping = 1
 " => Set current theme "
 " -------------------- "
 set termguicolors
-
-" {{ Onedark }}
-" let g:onedark_config = {
-"     \ 'style': 'cool',
-" \}
-" colorscheme onedark 
-
-" {{ Monokai Pro }}
-" let g:monokaipro_filter = "spectrum"
-" let g:monokaipro_italic_functions = 1
-" let g:monokaipro_sidebars = [ "nvim-tree" ]
-" colorscheme monokaipro
-
 colorscheme catppuccin-macchiato
 
 " ---------------------------- "
