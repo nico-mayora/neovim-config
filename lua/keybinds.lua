@@ -20,7 +20,6 @@ vim.cmd([[
     nnoremap <leader>d :bp<CR>
     nnoremap <leader>f :bn<CR>
 
-    map <F5> :source Session.vim<CR>
     map <F9> :nohl<CR>
     map <F10> :wa<CR>
     nnoremap <F8> <cmd>lua require('neotest').summary.toggle()<CR>
