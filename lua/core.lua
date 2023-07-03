@@ -10,7 +10,7 @@ vim.opt.signcolumn = 'yes'
 vim.opt.updatetime = 100
 vim.opt.iskeyword:remove { "_" }
 
-vim.opt.undodir = '~/.config/nvim/undodir'
+vim.opt.undodir = '/home/nico/.config/nvim/undodir'
 vim.opt.undofile = true
 
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
