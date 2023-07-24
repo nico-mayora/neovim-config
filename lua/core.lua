@@ -12,6 +12,7 @@ vim.opt.iskeyword:remove { "_" }
 
 vim.opt.undodir = '/home/nico/.config/nvim/undodir'
 vim.opt.undofile = true
+vim.opt.termguicolors = true
 
 vim.opt.completeopt = { 'menu', 'menuone', 'noselect' }
 

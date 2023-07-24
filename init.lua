@@ -23,6 +23,10 @@ require("lazy").setup({
         'nvim-treesitter/nvim-treesitter',
         build = ":TSUpdate"
     },
+    {
+        'aserowy/tmux.nvim',
+        config = function() return require("tmux").setup() end
+    },
     { 'ludovicchabant/vim-gutentags' },
     { 'tpope/vim-commentary' },
     { 'tpope/vim-surround' },
@@ -32,7 +36,10 @@ require("lazy").setup({
         dependencies = { 'kevinhwang91/promise-async' }
     },
     { 'akinsho/git-conflict.nvim' },
-    { 'lewis6991/gitsigns.nvim' },
+    {
+        'lewis6991/gitsigns.nvim',
+        config = function() return require('gitsigns').setup() end
+    },
     { 'nvim-neo-tree/neo-tree.nvim' }, 
     { 'MunifTanjim/nui.nvim' }, -- what do i need this for?
     { 'tpope/vim-fugitive' },
@@ -63,12 +70,12 @@ require("lazy").setup({
     { 'rafamadriz/friendly-snippets' },
     { 'github/copilot.vim' },
     { 'sbdchd/neoformat' },
-
+    -- ###
     { 'nvim-neotest/neotest' },
     { 'olimorris/neotest-rspec' },
     { 'tpope/vim-rails' },
     { 'vim-ruby/vim-ruby' }, 
-
+    -- ###
     {
         'simrat39/rust-tools.nvim',
         dependencies = { 'nvim-lua/plenary.nvim' }

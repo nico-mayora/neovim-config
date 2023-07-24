@@ -33,7 +33,6 @@ vim.cmd([[
     nnoremap <C-P> :Telescope find_files<CR>
 
     " Custom commands "
-    command Nt :Neotree
     command Fmt :Neoformat
     " Temp: "
     command Nht :lua require('rust-tools').inlay_hints.disable()
