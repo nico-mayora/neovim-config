@@ -54,6 +54,7 @@ require("lazy").setup({
         dependencies = { "nvim-tree/nvim-web-devicons" },
     },
     { 'neovim/nvim-lspconfig' },
+    { 'whonore/coqtail' }, -- For Coq
     {
         'williamboman/mason.nvim',
         build = ":MasonUpdate" -- :MasonUpdate updates registry contents
