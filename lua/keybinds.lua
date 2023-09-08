@@ -44,3 +44,8 @@ vim.cmd([[
     nmap <silent> <c-h> :wincmd h<CR>
     nmap <silent> <c-l> :wincmd l<CR>
 ]])
+
+
+
+
+ 

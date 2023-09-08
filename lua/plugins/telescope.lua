@@ -35,3 +35,7 @@ telescope.setup {
 }
 
 require("telescope").load_extension "fzf"
+require("telescope").load_extension('harpoon')
+
+vim.keymap.set('n', '<Leader>h', '<cmd>lua require("harpoon.mark").add_file()<cr>')
+vim.keymap.set('n', '<leader><leader>h', '<cmd>Telescope harpoon marks<cr>')

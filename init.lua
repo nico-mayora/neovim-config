@@ -49,6 +49,7 @@ require("lazy").setup({
         build = 'make'
     },
     { 'stevearc/aerial.nvim' },
+    { 'ThePrimeagen/harpoon' },
     {
         "folke/trouble.nvim",
         dependencies = { "nvim-tree/nvim-web-devicons" },
