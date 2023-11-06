@@ -16,7 +16,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     {
-        'nvim-telescope/telescope.nvim', tag = '0.1.1',
+        'nvim-telescope/telescope.nvim', tag = '0.1.4',
         dependencies = { 'nvim-lua/plenary.nvim' }
     },
     {
@@ -35,7 +35,7 @@ require("lazy").setup({
         'kevinhwang91/nvim-ufo',
         dependencies = { 'kevinhwang91/promise-async' }
     },
-    { 'akinsho/git-conflict.nvim' },
+    { 'akinsho/git-conflict.nvim', version = "", config = true },
     {
         'lewis6991/gitsigns.nvim',
         config = function() return require('gitsigns').setup() end
