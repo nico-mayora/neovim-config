@@ -86,8 +86,13 @@ require("lazy").setup({
     { 'goolord/alpha-nvim' },
     { 'akinsho/bufferline.nvim' },
     { 'nvim-lualine/lualine.nvim' },
-    { 'lukas-reineke/indent-blankline.nvim' },
     {
+        'lukas-reineke/indent-blankline.nvim',
+        main = 'ibl',
+        opts = {},
+        config = function() return require('ibl').setup() end
+    },
+   {
         'catppuccin/nvim',
         name = "catppuccin",
         priority = 1000
