@@ -23,10 +23,8 @@ vim.g.copilot_filetypes = {
     ['rust'] = true,
 }
 
-vim.g.gutentags_enabled = 1
-vim.g.gutentags_project_root = { 'Gemfile' }
+vim.g.gutentags_enabled = 0
 
-vim.g.neoformat_enabled_ruby = { 'rubocop' }
 vim.g.neoformat_enabled_haskell = { 'stylishhaskell' }
 
 vim.g.EasyMotion_do_mapping = 1

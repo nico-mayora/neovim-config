@@ -7,27 +7,17 @@ require("mason").setup {
 }
 
 require("mason-lspconfig").setup {
-    ensure_installed = { "hls", "solargraph", "tsserver" },
+    ensure_installed = { "clangd", },
 }
 
-require('lspconfig')['hls'].setup{
-    on_attach = on_attach,
-    flags = lsp_flags,
-}
-
-require('lspconfig')['solargraph'].setup {
-    on_attach = on_attach,
-    flags = lsp_flags,
-}
-
-require('lspconfig')['tsserver'].setup {
-    on_attach = on_attach,
-    flags = lsp_flags,
-}
+-- require('lspconfig')['hls'].setup{
+--     on_attach = on_attach,
+--     flags = lsp_flags,
+-- }
 
 require('lspconfig')['clangd'].setup {
     on_attach = on_attach,
-    flags = lsp_flags,
+   flags = lsp_flags,
 }
 
 vim.diagnostic.config({ virtual_text = false,}) -- Turn off inline diagnostics
