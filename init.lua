@@ -52,9 +52,23 @@ require("lazy").setup({
     { 'ThePrimeagen/harpoon' },
     {
         "folke/trouble.nvim",
-        dependencies = { "nvim-tree/nvim-web-devicons" },
+        opts = {}, -- for default options, refer to the configuration section for custom setup.
+        cmd = "Trouble",
+        -- TODO: Refactor this into another file.
+        keys = {
+            {
+                "<leader>t",
+                "<cmd>Trouble diagnostics toggle<cr>",
+                desc = "Diagnostics (Trouble)",
+            },
+            {
+                "<leader>xQ",
+                "<cmd>Trouble qflist toggle<cr>",
+                desc = "Quickfix List (Trouble)",
+            },
+        },
     },
-    { 'neovim/nvim-lspconfig' },
+{ 'neovim/nvim-lspconfig' },
     { 'whonore/coqtail' }, -- For Coq
     {
         'williamboman/mason.nvim',
@@ -73,8 +87,8 @@ require("lazy").setup({
     { 'github/copilot.vim' },
     { 'sbdchd/neoformat' },
     -- ###
-    { 'nvim-neotest/neotest' },
-    { 'olimorris/neotest-rspec' },
+    -- { 'nvim-neotest/neotest' },
+    -- { 'olimorris/neotest-rspec' },
     { 'tpope/vim-rails' },
     { 'vim-ruby/vim-ruby' }, 
     -- ###

@@ -7,17 +7,23 @@ require("mason").setup {
 }
 
 require("mason-lspconfig").setup {
-    ensure_installed = { "clangd", },
+    ensure_installed = { "clangd", "hls", "ocamllsp" },
 }
 
--- require('lspconfig')['hls'].setup{
---     on_attach = on_attach,
---     flags = lsp_flags,
--- }
+local lspconfig = require('lspconfig')
 
-require('lspconfig')['clangd'].setup {
+lspconfig.hls.setup {
+    on_attach = on_attach,
+    flags = lsp_flags,
+}
+
+lspconfig.clangd.setup {
     on_attach = on_attach,
    flags = lsp_flags,
+}
+
+lspconfig.ocamllsp.setup {
+    on_attach = on_attach,
 }
 
 vim.diagnostic.config({ virtual_text = false,}) -- Turn off inline diagnostics

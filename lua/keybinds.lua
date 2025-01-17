@@ -29,11 +29,10 @@ vim.cmd([[
     nnoremap <leader>b :Telescope buffers<cr>
     nnoremap <leader>g :Telescope live_grep<CR>
     nnoremap <leader>a :AerialToggle!<CR>
-    nnoremap <leader>t :TroubleToggle<CR>
     nnoremap <C-P> :Telescope find_files<CR>
 
     " Custom commands "
-    command Fmt :Neoformat
+    command Fmt :lua vim.lsp.buf.format()
     " Temp: "
     command Nht :lua require('rust-tools').inlay_hints.disable()
     command Yht :lua require('rust-tools').inlay_hints.enable()

@@ -20,12 +20,14 @@ vim.g.copilot_filetypes = {
     ['*'] = false,
     ['ruby'] = true,
     ['haskell'] = true,
-    ['rust'] = true,
+    ['rust'] = false,
+    ['cpp'] = true,
 }
 
 vim.g.gutentags_enabled = 0
 
 vim.g.neoformat_enabled_haskell = { 'stylishhaskell' }
+vim.g.neoformat_enabled_cpp = { 'clang-format' }
 
 vim.g.EasyMotion_do_mapping = 1
 
